@@ -1,0 +1,51 @@
+/*Un vector está ordenado crecientemente cuando cada elemento es menor o igual que todos los que le 
+suceden. Por ejemplo, (5, 5, 10, 10, 20) está ordenado crecientemente, mientras que (5, 5, 
+10, 20, 10) no lo está.
+Debes desarrollar un algoritmo eficiente que, dado un vector de enteros, determine si el vector está o no 
+ordenado crecientemente.
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+
+
+bool esta_ordenado(int a[], int n) { 
+	bool orden = true;
+	int i = 0;
+
+	while (orden==true && i < n - 1) {
+		if (a[i] > a[i + 1]) {
+			orden = false;
+		}
+		i++;
+	}
+
+	return orden;
+}
+
+const int TMAX = 1000000;  // No se podrán leer vectores de más de un millón de elementos
+
+bool ejecuta_caso() {
+	static int a[TMAX];
+	int n;
+	cin >> n;
+	if (n == -1 || n > TMAX) {
+		return false;
+	}
+	else {
+		for (int i = 0; i < n; i++) {
+			cin >> a[i];
+		}
+		if (esta_ordenado(a, n)) cout << "SI" << endl;
+		else cout << "NO" << endl;
+		return true;
+	}
+}
+
+int main() {
+	while (ejecuta_caso());
+}
+*/
