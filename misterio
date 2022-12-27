@@ -1,0 +1,48 @@
+/*
+//Devolver el numero más pequeño de entre los que más se repiten
+#include <iostream>
+
+using namespace std;
+
+const int TMAX = 1000000;  // No habrá vectores de más de un millón de elementos
+
+
+int misterio(const int a[], int n) {
+	int max = 1;
+	int cont = 1;
+	int res = a[0];
+
+	for (int i = 0; i < n-1; i++) {
+		if (a[i] == a[i + 1]) {
+			cont++;
+			if (cont > max) {
+				max = cont;
+				res = a[i];
+
+			}
+		}
+		else {
+			cont = 1;
+		}
+	}
+
+	return res;
+}
+
+void lee_vector(int a[], int& n) {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+}
+
+int main() {
+	static int a[TMAX];
+	int n;
+	do {
+		lee_vector(a, n);
+		if (n >= 0) {
+			cout << misterio(a, n) << endl;
+		}
+	} while (n != -1);
+}*/
