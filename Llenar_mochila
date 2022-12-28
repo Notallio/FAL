@@ -1,0 +1,64 @@
+/*
+//Realmente lo que tengo que hacer es conseguir el vector mas grande posible con esas condiciones
+Se dispone de una mochila que tiene un aguante de k Kg. Asimismo, se dispone de una hilera de
+productos con los que se puede llenar la mochila. Las únicas restricciones para llenar la mochila son que
+(i) únicamente pueden ponerse en la mochila productos que aparecen en posiciones consecutivas en la
+hilera; y (ii) el peso total de los productos no puede exceder el aguante k de la mochila.
+Debes especificar y desarrollar sistemáticamente un algoritmo iterativo eficiente que, dado un vector de
+enteros int a[n], en el que cada posición representa un producto en la hilera y cada valor representa el
+peso de dicho producto, y un aguante k para la mochila, encuentre el número máximo de productos con
+los que puede llenarse la mochila. Puede asumirse que (i) al menos hay un producto; (ii) tanto los pesos
+de los productos como el aguante de la mochila son positivos; y (iii) ningún peso de producto excede el
+aguante de la mochila. 
+
+#include <iostream>
+
+using namespace std;
+
+const int TMAX = 2000000; 
+
+int llena_mochila(const int a[], int n, int k);
+
+int llena_mochila(const int a[], int n, int k) {
+	// A IMPLEMENTAR
+	int cont = 0; // me va a contar los mini vectores que se creem
+	int sum = 0; // me va a ir sumando los pesos para compararlos con k
+	int max = 0; // el numero mayor de cosas que puedo meter segun las condiciones
+
+	for (int i = 0; i < n; i++) {
+		sum += a[i];
+		if (sum <= k) { 
+			cont++;
+		}
+		else {
+			sum = sum - a[i - cont];
+		}
+		if (cont > max) {
+			max = cont;
+		}
+	}
+	return max;
+}
+
+
+/* CODIGO PARA LEER Y EJECUTAR LOS CASOS DE PRUEBA */
+
+void lee_vector(int a[], int& n) {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+}
+
+int main() {
+	static int a[TMAX];
+	int n;
+	do {
+		lee_vector(a, n);
+		if (n >= 0) {
+			int k;
+			cin >> k;
+			cout << llena_mochila(a, n, k) << endl;
+		}
+	} while (n != -1);
+}*/
