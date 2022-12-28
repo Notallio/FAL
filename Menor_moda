@@ -1,0 +1,54 @@
+/*
+// ES IGUAL QUE EL DE MISTERIO
+
+#include <iostream>
+
+using namespace std;
+
+const int TMAX = 1000000;  // No habr� vectores de m�s de un mill�n de elementos
+
+int menor_moda(const int a[], int n);
+
+int menor_moda(const int a[], int n) {
+	int repe = 1;
+	int repe_moda = 1;
+	int moda = a[0];
+
+	for (int i = 0; i < n - 1; i++) {
+		if (a[i] == a[i + 1]) {
+			repe++;
+			if (repe > repe_moda) {
+				repe_moda = repe;
+				moda = a[i];
+			}
+
+		}
+		else {
+			repe = 1;
+		}
+	}
+	return moda;
+
+}
+
+
+/* CODIGO PARA LEER Y EJECUTAR LOS CASOS DE PRUEBA */
+
+void lee_vector(int a[], int& n) {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+}
+
+int main() {
+	static int a[TMAX];
+	int n;
+	do {
+		lee_vector(a, n);
+		if (n >= 0) {
+			cout << menor_moda(a, n) << endl;
+		}
+	} while (n != -1);
+}
+*/
