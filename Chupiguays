@@ -1,0 +1,60 @@
+/*
+
+En un vector de enteros se dice que una posición es chupi guay cuando el valor en dicha posición es un
+múltiplo de la suma de los valores en todas las posiciones que la preceden. 
+Debes especificar y desarrollar sistemáticamente un algoritmo iterativo eficiente que, dado un vector de
+enteros int a[n], devuelva el número de posiciones chupi guays que hay en dicho vector. 
+
+#include <iostream>
+
+using namespace std;
+
+const int TMAX = 2000000;  // No habr vectores de ms de dos millones de elementos
+
+int num_chupiguays(const int a[], int n);
+
+int num_chupiguays(const int a[], int n) {
+	/* IMPLEMENTACION: COMPLETA EL CUERPO DE LA FUNCION
+	   CON EL CODIGO QUE IMPLEMENTA EL ALGORITMO */
+     
+	//0 es multiplo de todos los numeros
+	//todos los numeros son multiplos de 1
+  
+	int i = 0;
+	int cont = 0;
+	int sum = 0;
+
+	while (i < n) {
+		if ((sum != 0) && ((a[i] % sum) == 0)) {
+			cont++;
+		}
+		else if (a[i] == 0) {
+			cont++;
+		}
+		sum += a[i];
+		i++;
+	}
+	return cont;
+}
+
+
+/* CODIGO PARA LEER Y EJECUTAR LOS CASOS DE PRUEBA */
+
+void lee_vector(int a[], int& n) {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+}
+
+int main() {
+	static int a[TMAX];
+	int n;
+	do {
+		lee_vector(a, n);
+		if (n >= 0) {
+			cout << num_chupiguays(a, n) << endl;
+		}
+	} while (n != -1);
+}
+*/
