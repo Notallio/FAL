@@ -1,0 +1,70 @@
+/*
+Un k-tramo de un vector de booleanos es una secuencia de valores consecutivos del vector en la que 
+aparecen exactamente k trues. 
+Se desea desarrollar un algoritmo iterativo que, dado un entero positivo k y un vector de booleanos, , 
+almacenado en las n primeras posiciones de un array a, determine el tamaño del k-tramo más corto de
+dicho vector.
+
+
+#include <iostream>
+
+using namespace std;
+
+int tramo_mas_corto(bool a[], int n, int k);
+
+int tramo_mas_corto(bool a[], int n, int k) {
+	// A IMPLEMENTAR		
+	int min = n+1;
+	int cont = 0;
+	int tramo = 0;
+
+	for (int i = 0; i < n; i++) {
+		if (cont < k) {
+			if (a[i] == true) {
+				tramo++;
+				cont++;
+
+			}
+			else if (cont > 0) {
+				tramo++;
+			}
+		}
+		if ((cont == k) && (tramo < min)) {
+			min = tramo;
+			tramo = 1;
+			cont = 1;
+		}	
+
+	}
+	return min;
+}
+
+/* CODIGO DE LECTURA Y EJECUCION DE CASOS DE PRUEBA:
+   NO MODIFICAR */
+
+
+void lee_caso(int& n, bool a[], int& k) {
+	cin >> n;
+	if (n != -1) {
+		for (int i = 0; i < n; i++) {
+			int elem;
+			cin >> elem;
+			a[i] = bool(elem);
+		}
+		cin >> k;
+	}
+}
+
+const int MAX_TAM = 100;
+int main() {
+	int n;
+	bool a[MAX_TAM];
+	int k;
+	do {
+		lee_caso(n, a, k);
+		if (n != -1) {
+			cout << tramo_mas_corto(a, n, k) << endl;
+		}
+	} while (n != -1);
+}
+*/
