@@ -1,0 +1,56 @@
+/*
+En una secuencia en la que inicialmente teníamos varios números consecutivos, nos han desaparecido
+algunos. ¿Cuál es el número más grande que podemos asegurar que ha desaparecido?
+Por ejemplo, en la secuencia [5 8 11 14 17], el valor más grande que echamos en falta es el 16.
+
+
+#include <iostream>
+using namespace std;
+
+
+const int TMAX = 300000;  // No habrá vectores de más e 300000 elementos
+
+
+int num_perdido(int a[], int n, int ini, int fin, int medio) {
+	// A IMPLEMENTAR
+	if ((fin - ini) == 1) {
+		return a[fin] - 1;
+	}
+	else {
+		int max = 0;
+		if (a[fin] - a[medio] != fin - medio) {
+			max = num_perdido(a, n, medio, fin, (medio + fin) / 2);//dcha
+
+		}
+		else {
+			max = num_perdido(a, n, ini, medio, (medio + ini) / 2);
+		}
+		return max;
+	}
+}
+
+/* CODIGO PARA LEER Y EJECUTAR LOS CASOS DE PRUEBA */
+
+bool procesa_caso() {
+	static int a[TMAX];
+	int n;
+	cin >> n;
+	int ini = 0;
+	int fin = n-1;
+	int medio = n/ 2;
+	if (n == -1) {
+		return false;
+	}
+	else {
+		for (int i = 0; i < n; i++) {
+			cin >> a[i];
+		}
+		cout << num_perdido(a, n,ini,fin,medio) << endl;
+		return true;
+	}
+}
+
+
+int main() {
+	while (procesa_caso());
+}*/
