@@ -1,0 +1,59 @@
+/*#include <iostream>
+using namespace std;
+
+//divide y venceras
+
+// El vector 'a' tiene 'n' elmenentos. El vector 'b' n+1
+
+//tengo que en contrar en el vector b el numero que se ha colado, el que no esta en el vector a
+// para ello voy a dividir el vector en dos 
+//voy a buscar por la izq y por la dcha 
+//si la posicion centra de los arrays no coincide es que el fallo estará por la izq
+//si coincide es que aun no se ha colado, entonces estará por la dcha
+
+int intruso(const int a[],const int b[], const int &ini,const int &fin) {
+	if (ini == fin) {//si inicio es igual a fin solo tengo un elemento, y si he llegado hasta aqui es que es ese elemento
+		return b[ini];
+	}
+	else {
+		int m = (ini + fin) / 2; //determino el medio del vector
+		if (b[m] == a[m]) { //si la posicion del medio coincide significa que aun no se ha colado el intruso asi que tengo que buscar por la dcha
+			return intruso(a,b,m+1,fin);
+		}
+		else {
+			return intruso(a,b,ini,m); //else busco por la izq
+		}
+	}
+}
+
+/************************************************************/
+//Tambien se puede hacer iterativo muy facilito
+
+const int NMAX = 10000; // El vector 'a' no tendr� m�s de 10000 de elementos
+
+bool ejecuta_caso() {
+	int n;
+	cin >> n;
+	int ini = 0;
+	int fin = n;
+	if (n == -1) {
+		return false;
+	}
+	else {
+		int a[NMAX];
+		int b[NMAX + 1];
+		for (int i = 0; i < n; i++) {
+			cin >> a[i];
+		}
+		for (int i = 0; i <= n; i++) {
+			cin >> b[i];
+		}
+		cout << intruso(a, b,ini,fin) << endl;
+		return true;
+	}
+}
+
+int main() {
+	while (ejecuta_caso());
+	return 0;
+}*/
