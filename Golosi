@@ -1,0 +1,68 @@
+/*
+hay una caja de chuches con n chuches,
+vcs te dice el valor calorico de cada chuche,
+vns el valor nutricional de cada chuche.
+Se quiere saber cual es el valor nutricional mas alto que se puede obtener dentro de esa caja
+sin que las chuches pasen de un umbral calorico u.
+Ademas tienen que ser cogidas por orden.
+ -vcs: vector de valores cal�ricos.
+ -vns: vector de valores nutricionales.
+ -n: N�mero de chuches.
+ -u: Umbral cal�rico
+ 
+#include <iostream>
+
+using namespace std;
+
+int mejor_cajita(int vcs[], int vns[], int n, int u);
+
+int mejor_cajita(int vcs[], int vns[], int n, int u) {
+	//int sumaCal = 0, sumaNut = 0, max = 0;
+
+	int ini = 0;
+	long int i = 1;
+	int sumaCal = vcs[0], sumaNut = vns[0], max = vns[0];
+	while (i < n){
+		if (sumaCal + vcs[i]<=u) {
+			sumaCal += vcs[i];
+			sumaNut += vns[i];
+			i++;
+			if (sumaNut > max) max = sumaNut;
+		}
+		else {
+			sumaCal -= vcs[ini];
+			sumaNut -= vns[ini];
+			ini++;
+		}
+	}
+	return max;
+}
+
+/************************************************************/
+
+const static int MAX_CHUCHES = 1000000;
+
+bool ejecuta_caso() {
+	int n;
+	cin >> n;
+	if (n == -1) return false;
+	else {
+		static int calorias[MAX_CHUCHES];
+		static int nutricionales[MAX_CHUCHES];
+		for (int i = 0; i < n; i++) {
+			cin >> calorias[i];
+		}
+		for (int i = 0; i < n; i++) {
+			cin >> nutricionales[i];
+		}
+		int umbral;
+		cin >> umbral;
+		cout << mejor_cajita(calorias, nutricionales, n, umbral) << endl;
+		return true;
+	}
+}
+
+int main() {
+	while (ejecuta_caso());
+	return 0;
+}*/
