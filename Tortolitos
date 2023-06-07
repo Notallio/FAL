@@ -1,0 +1,90 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const unsigned int MAX_CLIENTES = 10; // maximo numero de clientes
+
+typedef struct {
+	unsigned int n_clientes;                              // numero de clientes. 
+	unsigned int afinidades[MAX_CLIENTES][MAX_CLIENTES];  // la matriz se almacena en las 'n_clientes' primeras filas,
+														  // 'n_clientes' primeras columnas	                                                      
+} tMatrizAfinidad;
+
+bool esValido(const int& etapa, const int& i, const tMatrizAfinidad& as, vector <pair<int, int>> &proParejas) {//no es posible emparejarte contigo mismo
+	//todos los clientes deben estar emparejados con una unica persona
+	//si hay una pareja formada tiene que ser compatible Aij>0 y Aji>0
+	//la afinidad total es Aij+Aji
+	bool validez = true; //asumimos que es valido
+	int persona = 0;
+
+	if (etapa == i) return false; //si me estoy juntando conmigo mismo
+	if ((as.afinidades[etapa][i] <= 0)||(as.afinidades[i][etapa] <= 0)) return false; //si por alguna parte no hay compatibilidad es falso
+
+	//comprobacion de que esa pareja no tiene otra asignada ya (cuernos)
+	while ((persona<etapa) && (validez)) {//itero con persona
+		if ((proParejas[persona].first == i) && (proParejas[persona].second != etapa)) validez = false; //compruebo si i esta guardado en las posibles soluciones
+			//si esta guardado y no esta emparejado con etapa es que hay cuernos ;-;
+			
+		if ((proParejas[persona].second == i) && (proParejas[persona].first != etapa)) validez = false; //compruebo si i esta guardado en las posibles soluciones
+			//si esta guardado y no esta emparejado con etapa es que hay cuernos ;-;
+	
+		persona++;
+	}
+	return validez;
+}
+
+void esSolucion(int &sumaMax, int proSol) {
+	if (proSol > sumaMax) sumaMax = proSol;	
+}
+
+void recursiva(const tMatrizAfinidad& as, int &sumaMax, int proSol, vector <pair<int, int>> proParejas, int etapa) {
+	int i = 0;
+	while (i<as.n_clientes) {//viajo por todos los clientes
+		//añado
+		proParejas[etapa] = { etapa,i }; //tengo un vector que cada posicion es una pareja, asigno la persona i con las demas (etapa)
+		proSol += as.afinidades[etapa][i] + as.afinidades[i][etapa]; //la suma provisional de la afinidad
+		if (esValido(etapa,i,as, proParejas)) {
+			if (etapa == as.n_clientes - 1) {
+				esSolucion(sumaMax, proSol);
+			}
+			else recursiva(as,sumaMax,proSol,proParejas,etapa+1); //es una combinacion valida pero quiero ver las demas, sigo en la i cambio la etapa
+		}
+		//quito
+		proSol -= (as.afinidades[etapa][i] + as.afinidades[i][etapa]);
+		proParejas[etapa] = { -1,-1 };
+		//itero
+		i++;
+	}
+}
+int maxima_afinidad(const tMatrizAfinidad& as) {
+	// Punto de entrada al algoritmo: as representa la matriz de afinidades 
+	int sumaMax = 0; //sumaMaxima de todas las parejas
+	int proSol = 0; //suma provisional
+	vector <pair<int, int>> proParejas(as.n_clientes, { -1,-1 }); //parejas provisionales,
+	int etapa = 0;
+
+	recursiva(as,sumaMax,proSol,proParejas,etapa);
+	//la maxima afinidad es la suma de las afinidades totales de las parejas
+	return sumaMax/2;
+}
+
+
+void ejecuta_caso() {
+	tMatrizAfinidad as;
+	cin >> as.n_clientes;
+	for (unsigned int i = 0; i < as.n_clientes; i++) {
+		for (unsigned int j = 0; j < as.n_clientes; j++) {
+			cin >> as.afinidades[i][j];
+		}
+	}
+	cout << maxima_afinidad(as) << endl;
+}
+
+
+int main() {
+	unsigned int num_casos;
+	cin >> num_casos;
+	for (unsigned int i = 0; i < num_casos; i++) {
+		ejecuta_caso();
+	}
+}
